@@ -1,5 +1,7 @@
 Flask
 gunicorn
 SpeechRecognition
+wheel
+pipwin
 pyaudio
 moviepy
