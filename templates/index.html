@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/root.css" />
+    <title>Speech Recognition</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+          <span class="navbar-brand">TalkGes</span>
+        </div>
+      </nav>
+      <div class="center-content" id="videoContainer">
+        {% if video_files %} {% for video_file in video_files %}
+        <video controls>
+          <source
+            src="{{ url_for('static', filename='video_db/' + video_file) }}"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+        {% endfor %} {% else %}
+        <video controls>
+          <source src="#" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {% endif %} {% if text %}
+        <h2>Recognized Text:</h2>
+        <p>{{ text }}</p>
+        {% else %}
+        <h2></h2>
+        <p>Ready To Listen Again</p>
+        {% endif %}
+        <br />
+        <form method="POST" action="/" enctype="multipart/form-data">
+          <button type="submit"><i class="fa-solid fa-microphone"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/5480a0caa2.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
