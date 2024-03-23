@@ -1,6 +1,5 @@
 Flask==3.0.2
 gunicorn==21.2.0
 SpeechRecognition==3.10.1
-portaudio19-dev
 pyaudio==0.2.14
 moviepy==1.0.3
