@@ -18,9 +18,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code into the container
 COPY . .
 
+# Expose the port that Flask will run on
+EXPOSE 10002
 
 # Set the environment variables
 ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
 
 # Run the Flask application when the container starts
 CMD ["flask", "run"]
