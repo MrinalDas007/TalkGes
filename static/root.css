@@ -19,11 +19,20 @@ body {
   color: #fff; /* White color for brand text */
   font-size: 1rem;
   font-weight: bold;
-  padding-left: 15px;
+  padding-left: 10px;
 }
 
 .container-fluid {
   padding-top: 12px;
+  display: flex;
+  flex-direction: row;
+}
+
+.img-fluid {
+  width: 35px;
+  height: 35px;
+  margin-top: -8px;
+  margin-left: 5px;
 }
 
 .container {

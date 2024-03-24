@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../static/root.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='TalkGes_logo.ico') }}"
+    />
     <title>Speech Recognition</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
@@ -11,12 +16,13 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
+          <img src="../static/TalkGes_logo.png" alt="TCS" class="img-fluid" />
           <span class="navbar-brand">TalkGes</span>
         </div>
       </nav>
       <div class="center-content" id="videoContainer">
         {% if video_files %} {% for video_file in video_files %}
-        <video controls>
+        <video controls autoplay muted>
           <source
             src="{{ url_for('static', filename='video_db/' + video_file) }}"
             type="video/mp4"
@@ -24,7 +30,7 @@
           Your browser does not support the video tag.
         </video>
         {% endfor %} {% else %}
-        <video controls>
+        <video controls autoplay muted>
           <source src="#" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
