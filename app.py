@@ -1,31 +1,13 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 import os
-import speech_recognition as sr
 from moviepy.editor import VideoFileClip, concatenate_videoclips
 
 app = Flask(__name__)
 
 
-# Function to listen to audio through the microphone and convert it to text
-def listen_to_microphone():
-    recognizer = sr.Recognizer()
-    with sr.Microphone() as source:
-        print("Listening...")
-        audio_data = recognizer.listen(source)
-        print("Processing...")
-        try:
-            text = recognizer.recognize_google(audio_data)
-            return text
-        except sr.UnknownValueError:
-            return ""
-        except sr.RequestError as e:
-            return ""
-
-
 # Function to get the corresponding video file based on the recognized text
 def get_video_filename(text):
     videos_dir = os.path.join(app.root_path, "static/video_db/")
-    video_files = []
     words = text.split()
     print(words)
     # Create a list to store the VideoClip objects
@@ -51,20 +33,15 @@ def get_video_filename(text):
         for clip in video_clips:
             clip.close()
 
-        return ["combined_video.mp4"]  # Return the combined video file path
+        return "combined_video.mp4"  # Return the combined video file path
 
-    return ["wordnotfound.mp4"]
+    return "wordnotfound.mp4"
 
 
-# Route for the home page with audio recording form
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def index():
-    if request.method == "POST":
-        text = listen_to_microphone()
-        video_files = get_video_filename(text)
-        return render_template("index.html", text=text, video_files=video_files)
-    return render_template("index.html", text="Ready To Listen")
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="127.0.0.1", port=8002, debug=True)

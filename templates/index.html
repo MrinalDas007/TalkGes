@@ -20,31 +20,42 @@
           <span class="navbar-brand">TalkGes</span>
         </div>
       </nav>
-      <div class="center-content" id="videoContainer">
-        {% if video_files %} {% for video_file in video_files %}
-        <video controls autoplay muted>
-          <source
-            src="{{ url_for('static', filename='video_db/' + video_file) }}"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-        {% endfor %} {% else %}
-        <video controls autoplay muted>
-          <source src="#" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        {% endif %} {% if text %}
-        <h2>Recognized Text:</h2>
-        <p>{{ text }}</p>
-        {% else %}
-        <h2></h2>
-        <p>Ready To Listen Again</p>
-        {% endif %}
+      <div class="center-content">
+        <div id="videoContainer">
+          <video controls autoplay muted>
+            <source src="#" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
         <br />
-        <form method="POST" action="/" enctype="multipart/form-data">
-          <button type="submit"><i class="fa-solid fa-microphone"></i></button>
-        </form>
+        <div class="bottom-content">
+          <h2>Recognized Text:</h2>
+          <textarea
+            id="outputText"
+            name="outputText"
+            class="output-text"
+            readonly
+          >
+          </textarea>
+          <div class="buttons-container">
+            <button type="button" id="startButton">
+              <img
+                width="35"
+                height="35"
+                src="https://img.icons8.com/flat-round/64/record.png"
+                alt="record"
+              />
+            </button>
+            <button type="button" id="stopButton">
+              <img
+                width="33"
+                height="33"
+                src="https://img.icons8.com/flat-round/64/stop.png"
+                alt="stop"
+              />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -52,5 +63,6 @@
       src="https://kit.fontawesome.com/5480a0caa2.js"
       crossorigin="anonymous"
     ></script>
+    <script src="/static/speechToTextToVideo.js"></script>
   </body>
 </html>
